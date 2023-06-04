@@ -1,4 +1,4 @@
-<!--
+
 Avaliação Final para a cadeira N695- Desenvolvimento para Plataforma WEB
 
 Autores:
@@ -8,4 +8,3 @@ Natheskia Isadora Brígido -- Matrícula: 2213818
 Repositório no Github:
 https://github.com/glassofcoke/afn695.git
 
--->
