@@ -1,0 +1,100 @@
+/*ESTILOS GERAIS*/
+body{
+    font-family:'Roboto', sans-serif;
+}
+
+.row{
+    margin: 0;
+}
+.container{
+    padding: 70px 0;
+}
+p, li{
+    color:#444;
+    font-size:14px;
+}
+/*Barra de Navegação*/
+header, .navbar{
+    background-color: #353D41;
+    color:white;
+}
+#nav-container{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#logo{
+    width: 75px;
+    padding: bottom 0.2em;;
+}
+.navbar-brand{
+    padding: 0px;
+    color:#ffff;
+}
+.navbar-brand:hover{
+    color:#ffff;
+}
+.navbar-links{
+    color:#ffff;
+}
+.navbar-expand-lg .navbar-nav .nav-link{
+    padding: 1rem .8rem;
+}
+/*Slider*/
+.container-fluid{
+    padding: 0;
+}
+
+#mainSlider .carousel-inner, #mainSlider .carousel-item{
+    height: 90vh;
+}
+
+#mainSlider .carousel-caption{
+    top: 30%
+}
+
+#mainSlider .carousel-caption h2{
+    font-size: 50px;
+    -webkit-text-stroke: 1px black;
+    margin-bottom: 30px;
+}
+
+#mainSlider .carousel-caption p{
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    -webkit-text-stroke: .3px black;
+    color: #ffff;
+}
+.main-btn{
+    background-color:#353D41;
+    color:#ffff;
+    text-transform: uppercase;
+    width: 200px;
+    height: 60px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 3px solid;
+    transition: .5s;
+}
+.main-btn:hover{
+    text-decoration: none;
+    color: #ffff;
+    border-color: #353D41;
+}
+
+.carousel-indicators .active{
+    background-color:#353D41;
+}
+
+#card-area:hover{
+    border-color: #353D41;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Gerenciamento de Usuários</title>
+
+    <!-- Principal CSS do Bootstrap -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos customizados para esse template -->
+    <link href="/styles.css" rel="stylesheet">
+  </head>
+  <header>
+    <h1>Loja Fortaleza Fotografia - Gerenciamento de Usuário</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html" target="blank">Home</a></li>
+        <li><a href="cadastro.html" target="blank">Cadastre-se</a></li>
+        <li><a href="signin.html" target="blank">Login</a></li>
+      </ul>
+    </nav>
+    <style>
+      header a {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+  </header>
+  <body>
+    <main>
+    <table id="cliente">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Email</th>
+        <th>Endereço</th>
+        <th>Estado</th>
+        <th>País</th>
+        <th>CEP</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+  </table>
+  
+  <script>
+    function deleteCliente(id) {
+        if (confirm('Gostaria mesmo de excluir este cliente?')) {
+          fetch(`http://localhost:3000/cliente/${id}`, {
+            method: 'DELETE'
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Recarrega a tabela após apagar um cliente
+              loadCliente();
+            })
+            .catch(error => console.error(error))
+        }
+      }
+  function loadCliente() {
+    fetch('http://localhost:3000/cliente')
+      .then(response => response.json())
+      .then(data => {
+        let output = '';
+        data.forEach(cliente => {
+          output += `<tr><td>${cliente.nomeUsuario}</td><td>${cliente.sobrenomeUsuario}</td><td>${cliente.emailUsuario}</td><td>${cliente.enderecoUsuario}</td><td>${cliente.estadoUsuario}</td><td>${cliente.paisUsuario}</td><td>${cliente.cepUsuario}</td><td><button onclick="deleteCliente('${cliente._id}')"><img src="/imgs/remove.png" width=20px></button><button><a href="/editar.html?id=${cliente._id} "><img src="/imgs/edit-list.png" width=20px></button></a></td></tr>`;
+        });
+        document.getElementById('cliente').innerHTML = `<tr><th>Nome</th><th>Sobrenome</th><th>Email</th><th>Endereço</th><th>Estado</th><th>País</th><th>CEP</th><th>Ações</th></tr>${output}`;
+      })
+      .catch(error => console.error(error))
+  }
+
+  loadCliente();
+  </script>
+</main>
+</body>
+</html>

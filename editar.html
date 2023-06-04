@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Editar Usuário</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 40px 0;
+        }
+        h1 {
+          margin-bottom: 20px;
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 20px;
+        }
+        label {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+        }
+        button[type="submit"] {
+          background-color: #4CAF50;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        button[type="submit"]:hover {
+          background-color: #45a049;
+        }
+      </style>
+  </head>
+  <body>
+    <h1>Editar Usuário</h1>
+    <form id="form">
+      <input type="hidden" id="id">
+      <div>
+        <label for="nome">Nome</label><br>
+        <input type="text" id="nome">
+      </div>
+      <div>
+        <label for="sobrenome">Sobrenome</label><br>
+        <input type="text" id="sobrenome">
+      </div>
+      <div>
+        <label for="email">Email</label><br>
+        <input type="email" id="email">
+      </div>
+      <div>
+        <label for="senha">Senha</label><br>
+        <input type="password" id="senha">
+      </div>
+      <div>
+        <label for="endereco">Endereço</label><br>
+        <input type="text" id="endereco">
+      </div>
+      <div>
+        <label for="estado">Estado</label><br>
+        <input type="text" id="estado">
+      </div>
+      <div>
+        <label for="senha">País</label><br>
+        <input type="text" id="pais">
+      </div>
+      <div>
+        <label for="cep">CEP</label><br>
+        <input type="text" id="cep">
+      </div>
+      <button type="submit">Salvar</button>
+    </form>
+
+    <script>
+      // Captura o ID do cliente da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+
+//OLHAR ISSO AQUI DAS VARIAVEIS PARA CONST-- Captura os elementos do formulário
+      const form = document.querySelector('#form');
+      const inputId = document.querySelector('#id');
+      const inputNome = document.querySelector('#nome');
+      const inputSobrenome = document.querySelector('#sobrenome');
+      const inputEmail = document.querySelector('#email');
+      const inputSenha = document.querySelector('#senha');
+      const inputEndereco = document.querySelector("#endereco");
+      const inputPais = document.querySelector("#pais");
+      const inputEstado = document.querySelector("#estado");
+      const inputCep = document.querySelector("#cep");
+
+      // Define o valor do campo ID
+      inputId.value = id;
+
+      // Carrega os dados do cliente
+      fetch(`http://localhost:3000/cliente/${id}`)
+        .then(response => response.json())
+        .then(cliente => {
+          // Preenche os campos do formulário com os dados do cliente
+          inputNome.value = cliente.nomeUsuario;
+          inputSobrenome.value = cliente.sobrenomeUsuario;
+          inputEmail.value = cliente.emailUsuario;
+          inputSenha.value = cliente.senhaUsuario;
+          inputEndereco.value = cliente.enderecoUsuario;
+          inputPais.value = cliente.paisUsuario;
+          inputEstado.value = cliente.estadoUsuario;
+          inputCep.value = cliente.cepUsuario;
+        })
+        .catch(error => console.error(error))
+
+      // Adiciona um evento de submit ao formulário
+      form.addEventListener('submit', event => {
+        // Previne o comportamento padrão do formulário
+        event.preventDefault();
+
+        // Captura os valores dos campos do formulário
+        const id = inputId.value;
+        const nome = inputNome.value;
+        const sobrenome = inputSobrenome.value;
+        const email = inputEmail.value;
+        const senha = inputSenha.value;
+        const endereco = inputEndereco.value;
+        const pais = inputPais.value;
+        const estado = inputEstado.value;
+        const cep = inputCep.value;
+
+        // Envia os dados para o servidor para atualizar o cliente
+        fetch(`http://localhost:3000/cliente/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            nomeUsuario: nome,
+            sobrenomeUsuario: sobrenome,
+            emailUsuario: email,
+            senhaUsuario: senha,
+            enderecoUsuario: endereco,
+            paisUsuario: pais,
+            estadoUsuario: estado,
+            cepUsuario: cep
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            alert('Cliente Editado com sucesso!');
+          })
+          .catch(error => console.error(error))
+      });
+    </script>
+  </body>
+</html>
